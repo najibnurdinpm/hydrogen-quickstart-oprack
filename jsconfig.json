@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "checkJs": false,
+    "types": ["@remix-run/cloudflare", "vite/client"],
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "Bundler",
@@ -14,6 +15,11 @@
   "include": [
     "./**/*.d.ts",
     "./**/*.js",
-    "./**/*.jsx"
-  ]
+    "./**/*.jsx",
+    "**/.server/**/*.js",
+    "**/.server/**/*.jsx",
+    "**/.client/**/*.js",
+    "**/.client/**/*.jsx"
+  ],
+  "noEmit": true
 }

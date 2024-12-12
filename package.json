@@ -5,7 +5,7 @@
   "version": "2024.10.2",
   "type": "module",
   "scripts": {
-    "build": "shopify hydrogen build --codegen",
+    "build": "remix vite:build",
     "dev": "shopify hydrogen dev --codegen",
     "deploy": "wrangler pages deploy ./build/client",
     "preview": "shopify hydrogen preview --build",

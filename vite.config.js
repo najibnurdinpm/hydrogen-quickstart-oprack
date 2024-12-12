@@ -14,10 +14,14 @@ export default defineConfig({
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,
       },
+      buildDirectory: 'build',
     }),
     tsconfigPaths(),
   ],
   build: {
+    outDir: "build/client", // Mengubah output build ke folder build/client
+    emptyOutDir: true, // Membersihkan folder output sebelum build
+    assetsDir: "", // Menghindari subfolder 'assets' di dalam build/client
     assetsInlineLimit: 0,
   },
 
