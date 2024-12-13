@@ -9,22 +9,6 @@ import {
 import type {LinksFunction, LoaderArgs} from '@remix-run/cloudflare';
 import {defer} from '@remix-run/cloudflare';
 
-import styles from './styles/app.css';
-
-export const links: LinksFunction = () => {
-  return [
-    {rel: 'stylesheet', href: styles},
-    {
-      rel: 'preconnect',
-      href: 'https://cdn.shopify.com',
-    },
-    {
-      rel: 'preconnect',
-      href: 'https://shop.app',
-    },
-  ];
-};
-
 export default function App() {
 
   return (
