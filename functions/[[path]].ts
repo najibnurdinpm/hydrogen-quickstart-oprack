@@ -1,3 +1,4 @@
+import {createStorefrontClient} from '@shopify/hydrogen';
 import { createPagesFunctionHandler } from "@remix-run/cloudflare-pages";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -5,4 +6,20 @@ import { createPagesFunctionHandler } from "@remix-run/cloudflare-pages";
 // eslint-disable-next-line import/no-unresolved
 import * as build from "../build/server";
 
-export const onRequest = createPagesFunctionHandler({ build });
+type Context = EventContext<Env, string, unknown>;
+
+const getStoreFrontClient = async (context: Context) => {
+  return createStorefrontClient({
+    cache: await caches.open('hydrogen'),
+    publicStorefrontToken: context.env.PUBLIC_STOREFRONT_API_TOKEN,
+    storeDomain: `https://${context.env.PUBLIC_STORE_DOMAIN}`,
+  });
+};
+
+export const onRequest = createPagesFunctionHandler({ 
+  build,
+  getLoadContext: async (context: Context) => ({
+    storefront: (await getStoreFrontClient(context)).storefront,
+    env: process.env,
+  }), 
+});
