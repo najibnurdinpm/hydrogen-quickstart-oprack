@@ -11,12 +11,15 @@ import {defer} from '@remix-run/cloudflare';
 
 export async function loader({context}: LoaderArgs) {
 
+  console.log('context', context)
+
   return defer({context});
 }
 
 export default function App() {
 
   const data = useLoaderData<typeof loader>();
+  
 
   return (
     <html lang="en">
