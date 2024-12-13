@@ -19,7 +19,7 @@
     "**/.server/**/*.js",
     "**/.server/**/*.jsx",
     "**/.client/**/*.js",
-    "**/.client/**/*.jsx"
+    "**/.client/**/*.jsx", "app/entry.server.tsx", "server.ts"
   ],
   "noEmit": true
 }

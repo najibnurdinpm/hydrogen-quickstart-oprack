@@ -2,8 +2,13 @@ import {defineConfig} from 'vite';
 import {hydrogen} from '@shopify/hydrogen/vite';
 import {vitePlugin as remix, cloudflareDevProxyVitePlugin as remixCloudflareDevProxy} from '@remix-run/dev';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
+
 
 export default defineConfig({
+  server: {
+    serverPath: path.resolve(__dirname, './server.ts')
+  },
   plugins: [
     remixCloudflareDevProxy(),
     hydrogen(),

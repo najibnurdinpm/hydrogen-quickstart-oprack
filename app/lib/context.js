@@ -33,6 +33,7 @@ export async function createAppLoadContext(request, env, executionContext) {
     cart: {
       queryFragment: CART_QUERY_FRAGMENT,
     },
+    test: 'ini data test',
   });
 
   return {
