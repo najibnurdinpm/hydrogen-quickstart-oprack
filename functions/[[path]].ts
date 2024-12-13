@@ -5,9 +5,4 @@ import { createPagesFunctionHandler } from "@remix-run/cloudflare-pages";
 // eslint-disable-next-line import/no-unresolved
 import * as build from "../build/server";
 
-async function authenticate(context) {
-  context.data = {lower:{data:"some data"}};
-  return await context.next();
-}
-
-export const onRequest = [createPagesFunctionHandler({ build }), authenticate];
+export const onRequest = createPagesFunctionHandler({ build });

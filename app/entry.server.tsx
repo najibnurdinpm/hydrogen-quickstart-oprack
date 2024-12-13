@@ -2,6 +2,9 @@ import {RemixServer} from '@remix-run/react';
 import isbot from 'isbot';
 import {renderToReadableStream} from 'react-dom/server';
 import {EntryContext} from '@remix-run/cloudflare';
+import {createStorefrontClient} from '@shopify/hydrogen';
+
+type Context = EventContext<Env, string, unknown>;
 
 declare module '@remix-run/cloudflare' {
   interface CloudflareContext {
@@ -20,27 +23,14 @@ declare module '@remix-run/cloudflare' {
   }
 }
 
-
-export default async function handleRequest(
-  request: Request,
-  responseStatusCode: number,
-  responseHeaders: Headers,
-  remixContext: EntryContext,
-  context: { cloudflare: { env: any; context: any; [key: string]: any } }
-) {
-
-  const { env, context: cloudflareContext } = context.cloudflare;
-  
+async function setContext(context) {
   context.cloudflare = {
     ...context.cloudflare,
-    storefront: {
-      id: 123546,
-      token: 1222121,
-      // Tambahkan metode kustom jika diperlukan
-      query: async (query: string) => {
-        // Implementasi query khusus
-      }
-    },
+    env: process.env,
+    storefront: await createStorefrontClient({
+      publicStorefrontToken: process.env.PUBLIC_STOREFRONT_API_TOKEN,
+      storeDomain: `https://${process.env.PUBLIC_STORE_DOMAIN}`,
+    }).storefront,
     // Tambahkan properti kustom lainnya
     session: {
       get: (key: string) => {
@@ -51,8 +41,18 @@ export default async function handleRequest(
       }
     }
   };
+}
 
 
+export default async function handleRequest(
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext,
+  context: { cloudflare: { env: any; context: any; [key: string]: any } }
+) {
+
+  await setContext(context)
 
   const body = await renderToReadableStream(
     <RemixServer context={remixContext} url={request.url} />,
