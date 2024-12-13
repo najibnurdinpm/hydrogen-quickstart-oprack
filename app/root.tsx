@@ -6,8 +6,6 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import type {LoaderArgs} from '@remix-run/cloudflare';
-import {defer} from '@remix-run/cloudflare';
 
 export default function App() {
   
