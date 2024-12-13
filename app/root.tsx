@@ -25,18 +25,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export async function loader({context}: LoaderArgs) {
-  
-  const cartId = await context.session.get('cartId');
-
-  return 'hasilnya ini'
-}
-
 export default function App() {
-
-  const data = useLoaderData<typeof loader>();
-
-  console.log('data isinya' data)
 
   return (
     <html lang="en">
