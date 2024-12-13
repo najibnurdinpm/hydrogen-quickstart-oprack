@@ -6,10 +6,17 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import type {LinksFunction, LoaderArgs} from '@remix-run/cloudflare';
+import type {LoaderArgs} from '@remix-run/cloudflare';
 import {defer} from '@remix-run/cloudflare';
 
+export async function loader({context}: LoaderArgs) {
+
+  return defer({context});
+}
+
 export default function App() {
+
+  const data = useLoaderData<typeof loader>();
 
   return (
     <html lang="en">
