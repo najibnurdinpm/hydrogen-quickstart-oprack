@@ -5,7 +5,9 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 
-export async function loader() {
+export async function loader({
+  context,
+}: LoaderArgs) {
   return 'hasil inidex';
 }
 
