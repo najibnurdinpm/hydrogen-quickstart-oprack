@@ -1,5 +1,4 @@
 
-import {CollectionConnection} from '@shopify/hydrogen/dist/storefront-api-types';
 import {LoaderArgs} from '@remix-run/cloudflare';
 import {
   useLoaderData,
